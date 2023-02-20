@@ -19,13 +19,18 @@ function createTable(db_con){
     });
 }
 
-function insertPerson(db_con){
-    var sql = `INSERT INTO people(name) values('Gabriel')`
+function insertRandomPerson(db_con){
+    const names = ["Keanu Reeves", "Adrian Smith", "Chris Rock", "Michael Jackson", "Scottie Pippen",
+                "Mike Tyson", "Steve Harris", "Joe Rogan", "Jimmy Fallon", "Michael Douglas"];
+    const random = Math.floor(Math.random() * names.length);
+    //console.log(random, names[random]);
+
+    var sql = `INSERT INTO people (name) VALUES('${names[random]}');`;
     db_con.query(sql, function (err, result){
         if (err) throw err;
-        console.log("Name inserted");
+        console.log("Value inserted");
         console.log(result)
     });
-}
 
-module.exports = {createSqlConnection, createTable, insertPerson};
+}
+module.exports = {createSqlConnection, createTable, insertRandomPerson};

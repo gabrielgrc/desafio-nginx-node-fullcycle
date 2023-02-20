@@ -7,7 +7,7 @@ db_funcs.createTable(db_con);
 app.get("/", (req, res) => {
 	res.send('<h1>Full Cycle !</h1>')
 
-    db_funcs.insertPerson(db_con);
+    db_funcs.insertRandomPerson(db_con);
 });
 
 app.listen(3000, () => {
