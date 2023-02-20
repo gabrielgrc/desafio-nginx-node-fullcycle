@@ -1,23 +1,15 @@
 const express = require("express");
 const app = express();
-const port = 3000
-const config = {
-    host: 'db',
-    user: 'root',
-    password: 'root',
-    database:'nodedb'
-};
-const mysql = require('mysql')
-const connection = mysql.createConnection(config)
-
-const sql = `INSERT INTO people(name) values('Wesley')`
-connection.query(sql)
-connection.end()
+const db_funcs = require("./db_functions");
+const db_con = db_funcs.createSqlConnection();
+db_funcs.createTable(db_con);
 
 app.get("/", (req, res) => {
 	res.send('<h1>Full Cycle !</h1>')
+
+    db_funcs.insertPerson(db_con);
 });
 
-app.listen(port, () => {
+app.listen(3000, () => {
     console.log(`Server is up and running on 3000 ...`);
     });
